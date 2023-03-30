@@ -1,10 +1,15 @@
 import './App.css';
-
+import {ducks} from './demo'
+import DuckItem from './DuckItem'
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img className="App-logo" alt="logo" />
+        <p>
+          {ducks.map(duck =>(
+             <DuckItem duck={duck} key={duck.name}/>
+          ))}
+        </p>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
