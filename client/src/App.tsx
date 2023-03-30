@@ -3,7 +3,7 @@ import axios  from 'axios'
 import {
   useState,useEffect
 } from 'react'
-import {Header,List} from 'semantic-ui-react'
+import {Card,List} from 'antd'
 function App() {
   const [activities, setActivites] = useState([]);
 
@@ -17,13 +17,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header as='h2' icon='users' content='Reactivities'>
+      <Card hoverable
+            style={{ width: 1490 }}>
         <List>
           {activities.map((activity:any) => (
               <li key={activity.id}>{activity.title}</li>
           ))}
         </List>
-      </Header>
+      </Card>
     </div>
   );
 }
