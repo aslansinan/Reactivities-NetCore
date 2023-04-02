@@ -8,17 +8,20 @@ const items: MenuProps['items'] = [
         label: 'Reactivities',
         key: 'mail',
         icon: <MailOutlined />,
+        className : 'mail',
     },
     {
         label: 'Activities',
         key: 'mail2',
         icon: <AppstoreOutlined />,
+        className : 'mail',
     },
-    {
+    {   
         label: (
             <button>Navigation Four - Link</button>
         ),
         key: 'alipay',
+        className : 'mail',
     },
 ];
 
@@ -30,7 +33,7 @@ const NavBar: React.FC = () => {
         setCurrent(e.key);
     };
 
-    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+    return <Menu onClick={onClick} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
 };
 
 export default NavBar;

@@ -1,11 +1,12 @@
 import '../../App.css';
 import axios  from 'axios'
-import {
-  useState,useEffect
+import React,{
+  useState,useEffect, Fragment
 } from 'react'
-import {List} from 'semantic-ui-react'
+import {List} from 'antd'
 import { Activity } from '../models/activity';
 import NavBar from './NavBar'
+import { Container } from 'semantic-ui-react';
 function App() {
   const [activities, setActivites] = useState<Activity[]>([]);
 
@@ -18,14 +19,16 @@ function App() {
   },[])
 
   return (
-    <div className="App">
+    <Fragment>
         <NavBar />
+        <Container className='container'>
         <List>
           {activities.map((activity) => (
               <li key={activity.id}>{activity.title}</li>
           ))}
         </List>
-    </div>
+        </Container>
+    </Fragment>
   );
 }
 export default App;
