@@ -7,6 +7,7 @@ import {List} from 'antd'
 import { Activity } from '../models/activity';
 import NavBar from './NavBar'
 import { Container } from 'semantic-ui-react';
+import ActivtiyDashboard from '../../features/activities/dashboard/ActivtiyDashboard';
 function App() {
   const [activities, setActivites] = useState<Activity[]>([]);
 
@@ -22,11 +23,7 @@ function App() {
     <Fragment>
         <NavBar />
         <Container className='container'>
-        <List>
-          {activities.map((activity) => (
-              <li key={activity.id}>{activity.title}</li>
-          ))}
-        </List>
+            <ActivtiyDashboard activities={activities} />
         </Container>
     </Fragment>
   );
