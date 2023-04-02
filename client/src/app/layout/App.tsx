@@ -3,8 +3,9 @@ import axios  from 'axios'
 import {
   useState,useEffect
 } from 'react'
-import {Card,List} from 'antd'
+import {List} from 'semantic-ui-react'
 import { Activity } from '../models/activity';
+import NavBar from './NavBar'
 function App() {
   const [activities, setActivites] = useState<Activity[]>([]);
 
@@ -18,14 +19,12 @@ function App() {
 
   return (
     <div className="App">
-      <Card hoverable
-            style={{ width: 1490 }}>
+        <NavBar />
         <List>
           {activities.map((activity) => (
               <li key={activity.id}>{activity.title}</li>
           ))}
         </List>
-      </Card>
     </div>
   );
 }
