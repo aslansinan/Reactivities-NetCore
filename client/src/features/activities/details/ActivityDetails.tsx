@@ -11,7 +11,7 @@ export default function ActivityDetails({activity}: Props) {
     return (
         <Card
             hoverable
-            style={{width: 380, marginTop: 35}}
+            style={{width: 320, marginTop: 35}}
             cover={<img alt="example" src={`/assets/categoryImages/${activity.category}.jpg`}/>}
         >
             <Meta title={activity.title} description={activity.date}/>
