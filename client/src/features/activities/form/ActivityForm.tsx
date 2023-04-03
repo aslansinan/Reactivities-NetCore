@@ -1,48 +1,76 @@
 ﻿import {Button, Card, DatePicker, Form, Input} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import {Activity} from "../../../app/models/activity";
+import React, {
+    ChangeEvent,
+    useState
+} from 'react'
 
 interface Props {
     activity: Activity | undefined;
     closeForm: () => void
+    createOrEdit: (activity: Activity) => void;
 }
 
 const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
-export default function ActivityForm({activity,closeForm}:Props) {
+export default function ActivityForm({activity: selectedActivity, closeForm,createOrEdit}: Props) {
+    const initialState = selectedActivity ?? {
+        id: '',
+        title: '',
+        category: '',
+        description: '',
+        city: '',
+        venue: '',
+        date: ''
+    }
+    const [activity, setActivity] = useState(initialState);
+
+    function handleSubmit() {
+        createOrEdit(activity);
+        console.log(activity)
+    }
+    function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const {name, value} = event.target;
+        setActivity({...activity, [name]: value})
+    }
     return (
         <Card style={{maxWidth: 320}}>
-            <Form name="basic"
-                  labelCol={{span: 8}}
-                  wrapperCol={{span: 16}}
+            <form onSubmit={handleSubmit} 
                   style={{maxWidth: 400}}
-                  initialValues={{remember: true}}
                   autoComplete="off">
-                <Form.Item label="Title"
-                           name="Title">
-                    <Input/>
-                </Form.Item>
-                <Form.Item label="Description"
-                           name="Description">
-                    <TextArea rows={4}/>
-                </Form.Item>
-                <Form.Item label="Category"
-                           name="Category">
-                    <Input/>
-                </Form.Item>
-                <Form.Item label="Date"
-                           name="Date">
-                    <DatePicker/>
-                </Form.Item>
-                <Form.Item label="City"
-                           name="City">
-                    <Input/>
-                </Form.Item>
-                <Form.Item label="Venue"
-                           name="Venue">
-                    <Input/>
-                </Form.Item>
+                <br />
+                <label htmlFor="title">Title</label>
+                <br />
+                <input name="title" value={activity.title} onChange={handleInputChange} />
+                <br />
+                <br />
+                <label htmlFor="description">Description</label>
+                <br />
+                <textarea name="description" value={activity.description} onChange={handleInputChange} />
+                <br />
+                <br />
+                <label htmlFor="category">Category</label>
+                <br />
+                <input name="category" value={activity.category} onChange={handleInputChange} />
+                <br />
+                <br />
+                <label htmlFor="date">Date</label>
+                <br />
+                <input name="date" value={activity.date} onChange={handleInputChange} />
+                <br />
+                <br />
+                <label htmlFor="city">City</label>
+                <br />
+                <input name="city" value={activity.city} onChange={handleInputChange} />
+                <br />
+                <br />
+                <label htmlFor="venue">Venue</label>
+                <br />
+                <input name="venue" value={activity.venue} onChange={handleInputChange} />
+                <br />
+                <br />
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
                         Submit
@@ -51,7 +79,9 @@ export default function ActivityForm({activity,closeForm}:Props) {
                         Cancel
                     </Button>
                 </Form.Item>
-            </Form>
+                <br />
+            </form>
         </Card>
     )
 }
+
