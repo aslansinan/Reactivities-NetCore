@@ -10,3 +10,7 @@ body {
 .container{
   margin-top: 35px!important;
 }
+.activity-head{
+  margin-top: 10px;
+  margin-left: 100px;
+}

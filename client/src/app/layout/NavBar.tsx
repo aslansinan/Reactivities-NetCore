@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
-import { MenuProps } from 'antd';
+import {Button, MenuProps } from 'antd';
 import { Menu } from 'antd';
 
 const items: MenuProps['items'] = [
@@ -18,7 +18,9 @@ const items: MenuProps['items'] = [
     },
     {   
         label: (
-            <button>Create Activity</button>
+            <Button type="primary">
+                Create Activity
+            </Button>
         ),
         key: 'alipay',
         className : 'mail',
