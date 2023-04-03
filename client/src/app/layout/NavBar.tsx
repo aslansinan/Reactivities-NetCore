@@ -27,15 +27,13 @@ const items: MenuProps['items'] = [
     },
 ];
 
-const NavBar: React.FC = () => {
+interface Props {
+    openForm: () => void;
+}
+export default function NavBar({openForm}:Props){
     const [current, setCurrent] = useState('mail');
+    
 
-    const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
-        setCurrent(e.key);
-    };
-
-    return <Menu onClick={onClick} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
+    return <Menu onClick={openForm} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
 };
-
-export default NavBar;
+    

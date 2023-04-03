@@ -5,9 +5,10 @@ import {Activity} from '../../../app/models/activity';
 
 interface Props {
     activities: Activity[];
+    selectActivity: (id: string) => void;
 }
 
-export default function ActivityList({activities}: Props) {
+export default function ActivityList({activities,selectActivity}: Props) {
     return (
         <Container>
             {activities.map(activity => (
@@ -22,7 +23,7 @@ export default function ActivityList({activities}: Props) {
                             <div>{activity.city}, {activity.venue}</div>
                         </Item.Description>
                         <Item.Extra>
-                            <Button style={{float: 'right'}} type="primary">
+                            <Button onClick={()=>selectActivity(activity.id)} style={{float: 'right'}} type="primary">
                                 View
                             </Button>
                             <Button type="dashed">

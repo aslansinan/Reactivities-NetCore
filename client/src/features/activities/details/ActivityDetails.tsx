@@ -5,9 +5,11 @@ import {Activity} from '../../../app/models/activity';
 
 interface Props {
     activity: Activity
+    cancelSelectActivity: () => void;
+    openForm: (id: string) => void;
 }
 
-export default function ActivityDetails({activity}: Props) {
+export default function ActivityDetails({activity, cancelSelectActivity,openForm}: Props) {
     return (
         <Card
             hoverable
@@ -16,9 +18,9 @@ export default function ActivityDetails({activity}: Props) {
         >
             <Meta title={activity.title} description={activity.date}/>
             <p>{activity.description}</p>
-            <Space style={{marginTop: 10,float: 'right'}}>
-                <Button type="primary">Edit</Button>
-                <Button type="dashed">Cancel</Button>
+            <Space style={{marginTop: 10, float: 'right'}}>
+                <Button onClick={() => openForm(activity.id)} type="primary">Edit</Button>
+                <Button type="dashed" onClick={cancelSelectActivity}>Cancel</Button>
             </Space>
         </Card>
     )
