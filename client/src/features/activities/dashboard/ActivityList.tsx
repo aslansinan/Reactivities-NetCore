@@ -6,9 +6,10 @@ import {Activity} from '../../../app/models/activity';
 interface Props {
     activities: Activity[];
     selectActivity: (id: string) => void;
+    deleteActivity: (id: string) => void;
 }
 
-export default function ActivityList({activities,selectActivity}: Props) {
+export default function ActivityList({activities,selectActivity,deleteActivity}: Props) {
     return (
         <Container>
             {activities.map(activity => (
@@ -25,6 +26,9 @@ export default function ActivityList({activities,selectActivity}: Props) {
                         <Item.Extra>
                             <Button onClick={()=>selectActivity(activity.id)} style={{float: 'right'}} type="primary">
                                 View
+                            </Button>
+                            <Button onClick={()=>deleteActivity(activity.id)} style={{float: 'right'}} danger>
+                                Delete
                             </Button>
                             <Button type="dashed">
                                 {activity.category}

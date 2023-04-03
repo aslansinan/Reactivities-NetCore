@@ -14,16 +14,17 @@ interface Props {
     openForm: (id: string) => void;
     closeForm: () => void
     createOrEdit: (activity: Activity) => void;
+    deleteActivity: (id: string) => void;
 }
 
 export default function ActivtiyDashboard({
                                               activities, selectedActivity, selectActivity,
                                               cancelSelectActivity,
-                                              editMode, openForm, closeForm,createOrEdit
+                                              editMode, openForm, closeForm,createOrEdit,deleteActivity
                                           }: Props) {
     return (
         <Row>
-            <Col span={16}><ActivityList activities={activities} selectActivity={selectActivity}/></Col>
+            <Col span={16}><ActivityList activities={activities} selectActivity={selectActivity} deleteActivity={deleteActivity}/></Col>
             <Col span={8}>{selectedActivity && !editMode &&
                 <ActivityDetails
                     activity={selectedActivity}
