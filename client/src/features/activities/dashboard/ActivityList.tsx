@@ -1,6 +1,6 @@
-﻿import {Card, Descriptions, Button, Divider} from 'antd';
+﻿import {Card, Button, Divider} from 'antd';
 import React from 'react';
-import {Container, Item, Label, Segment} from 'semantic-ui-react';
+import {Container, Item} from 'semantic-ui-react';
 import {Activity} from '../../../app/models/activity';
 
 interface Props {
@@ -12,7 +12,7 @@ export default function ActivityList({activities}: Props) {
         <Container>
             {activities.map(activity => (
                 <Card key={activity.id} title={activity.title} className='activity-head' bordered={false}
-                      style={{width: 600}}>
+                      style={{width: 800}}>
                     <Item.Content>
                         <Item.Meta>
                             {activity.date}
