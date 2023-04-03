@@ -1,5 +1,5 @@
 ﻿import {Card, Button, Divider} from 'antd';
-import React from 'react';
+import React,{useState,SyntheticEvent} from 'react';
 import {Container, Item} from 'semantic-ui-react';
 import {Activity} from '../../../app/models/activity';
 
@@ -7,9 +7,15 @@ interface Props {
     activities: Activity[];
     selectActivity: (id: string) => void;
     deleteActivity: (id: string) => void;
+    submitting:boolean;
 }
 
-export default function ActivityList({activities,selectActivity,deleteActivity}: Props) {
+export default function ActivityList({activities,selectActivity,deleteActivity,submitting}: Props) {
+    const [target,setTarget] =useState('');
+    function handleActivityDelete(e:any, id:string) {
+        setTarget(e.currentTarget.name)
+        deleteActivity(id);
+    }
     return (
         <Container>
             {activities.map(activity => (
@@ -27,7 +33,12 @@ export default function ActivityList({activities,selectActivity,deleteActivity}:
                             <Button onClick={()=>selectActivity(activity.id)} style={{float: 'right'}} type="primary">
                                 View
                             </Button>
-                            <Button onClick={()=>deleteActivity(activity.id)} style={{float: 'right'}} danger>
+                            <Button 
+                                name={activity.id}
+                                loading={submitting && target === activity.id}
+                                onClick={(e) => handleActivityDelete(e, activity.id)}
+                                style={{float: 'right'}}
+                                danger>
                                 Delete
                             </Button>
                             <Button type="dashed">

@@ -1,5 +1,4 @@
-﻿import {Button, Card, DatePicker, Form, Input} from "antd";
-import TextArea from "antd/es/input/TextArea";
+﻿import {Button, Card, Form} from "antd";
 import {Activity} from "../../../app/models/activity";
 import React, {
     ChangeEvent,
@@ -10,12 +9,13 @@ interface Props {
     activity: Activity | undefined;
     closeForm: () => void
     createOrEdit: (activity: Activity) => void;
+    submitting :boolean;
 }
 
 const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
-export default function ActivityForm({activity: selectedActivity, closeForm,createOrEdit}: Props) {
+export default function ActivityForm({activity: selectedActivity, closeForm,createOrEdit,submitting}: Props) {
     const initialState = selectedActivity ?? {
         id: '',
         title: '',
@@ -72,7 +72,7 @@ export default function ActivityForm({activity: selectedActivity, closeForm,crea
                 <br />
                 <br />
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button loading={submitting} type="primary" htmlType="submit">
                         Submit
                     </Button>
                     <Button onClick={closeForm} htmlType="button">
