@@ -58,7 +58,7 @@ export default function ActivityForm({activity: selectedActivity, closeForm,crea
                 <br />
                 <label htmlFor="date">Date</label>
                 <br />
-                <input name="date" value={activity.date} onChange={handleInputChange} />
+                <input name="date" type='date' value={activity.date} onChange={handleInputChange} />
                 <br />
                 <br />
                 <label htmlFor="city">City</label>
