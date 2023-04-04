@@ -2,7 +2,7 @@ import '../../App.css';
 import React, {
     useState, useEffect, Fragment
 } from 'react'
-import {List} from 'antd'
+import {Button} from 'antd'
 import {Activity} from '../models/activity';
 import NavBar from './NavBar'
 import {Container} from 'semantic-ui-react';
@@ -11,6 +11,7 @@ import {v4 as uuid} from 'uuid'
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
+import { observer } from 'mobx-react-lite';
 
 function App() {
     const {activityStore} = useStore();
@@ -83,6 +84,7 @@ function App() {
             <NavBar openForm={handleFormOpen}/>
             <Container className='container'>
                 <h2>{activityStore.title}</h2>
+                <Button onClick={activityStore.setTitle}>Add exclamation</Button>
                 <ActivtiyDashboard
                     activities={activities}
                     selectedActivity={selectedActivity}
@@ -100,4 +102,4 @@ function App() {
     );
 }
 
-export default App;
+export default observer(App);
