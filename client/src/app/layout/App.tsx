@@ -2,7 +2,6 @@ import '../../App.css';
 import React, {
     useState, useEffect, Fragment
 } from 'react'
-import {Button} from 'antd'
 import {Activity} from '../models/activity';
 import NavBar from './NavBar'
 import {Container} from 'semantic-ui-react';
@@ -18,20 +17,11 @@ function App() {
     const [activities, setActivites] = useState<Activity[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
     const [editMode, setEditMode] = useState(false);
-    const [loading, setLoading] = useState(true)
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
-        agent.Activities.list().then((response) => {
-            let activities: Activity[] = [];
-            response.forEach(activity => {
-                activity.date = activity.date.split('T')[0];
-                activities.push(activity);
-            })
-            setActivites(activities)
-            setLoading(false)
-        })
-    }, [])
+       activityStore.loadActivities();
+    }, [activityStore])
 
     function handleSelectActivity(id: string) {
         setSelectedActivity(activities.find(x => x.id))
@@ -78,15 +68,13 @@ function App() {
         })
     }
 
-    if (loading) return <LoadingComponent content='Loading App'/>
+    if (activityStore.loadingInitial) return <LoadingComponent content='Loading App'/>
     return (
         <Fragment>
             <NavBar openForm={handleFormOpen}/>
             <Container className='container'>
-                <h2>{activityStore.title}</h2>
-                <Button onClick={activityStore.setTitle}>Add exclamation</Button>
                 <ActivtiyDashboard
-                    activities={activities}
+                    activities={activityStore.activities}
                     selectedActivity={selectedActivity}
                     selectActivity={handleSelectActivity}
                     cancelSelectActivity={handleCancelSelectActivity}
