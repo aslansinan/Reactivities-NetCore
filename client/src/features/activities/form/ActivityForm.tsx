@@ -5,18 +5,14 @@ import React, {
     useState
 } from 'react'
 import { useStore } from "../../../app/stores/store";
-
-interface Props {
-    createOrEdit: (activity: Activity) => void;
-    submitting :boolean;
-}
+import { observer } from "mobx-react-lite";
 
 const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
-export default function ActivityForm({createOrEdit,submitting}: Props) {
+export default observer(function ActivityForm() {
     const {activityStore} = useStore();
-    const {selectedActivity,closeForm} = activityStore;
+    const {selectedActivity,closeForm, createActivity, updateActivity, loading} = activityStore;
     const initialState = selectedActivity ?? {
         id: '',
         title: '',
@@ -29,8 +25,7 @@ export default function ActivityForm({createOrEdit,submitting}: Props) {
     const [activity, setActivity] = useState(initialState);
 
     function handleSubmit() {
-        createOrEdit(activity);
-        console.log(activity)
+      activity.id ? updateActivity(activity) : createActivity(activity);
     }
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const {name, value} = event.target;
@@ -73,7 +68,7 @@ export default function ActivityForm({createOrEdit,submitting}: Props) {
                 <br />
                 <br />
                 <Form.Item {...tailLayout}>
-                    <Button loading={submitting} type="primary" htmlType="submit">
+                    <Button loading={loading} type="primary" htmlType="submit">
                         Submit
                     </Button>
                     <Button onClick={closeForm} htmlType="button">
@@ -84,5 +79,5 @@ export default function ActivityForm({createOrEdit,submitting}: Props) {
             </form>
         </Card>
     )
-}
+})
 
