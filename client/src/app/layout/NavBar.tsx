@@ -2,6 +2,7 @@
 import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
 import {Button, MenuProps } from 'antd';
 import { Menu } from 'antd';
+import { useStore } from '../stores/store';
 
 const items: MenuProps['items'] = [
     {
@@ -27,13 +28,11 @@ const items: MenuProps['items'] = [
     },
 ];
 
-interface Props {
-    openForm: () => void;
-}
-export default function NavBar({openForm}:Props){
-    const [current, setCurrent] = useState('mail');
-    
 
-    return <Menu onClick={openForm} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
+export default function NavBar(){
+    const [current, setCurrent] = useState('mail');
+    const  {activityStore} = useStore();
+
+    return <Menu onClick={() => activityStore.openForm()} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
 };
     
