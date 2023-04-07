@@ -1,22 +1,20 @@
 ﻿import {Card, Button, Divider} from 'antd';
+import { observer } from 'mobx-react-lite';
 import React,{useState,SyntheticEvent} from 'react';
 import {Container, Item} from 'semantic-ui-react';
 import {Activity} from '../../../app/models/activity';
 import { useStore } from '../../../app/stores/store';
 
-interface Props {
-    activities: Activity[];
-    deleteActivity: (id: string) => void;
-    submitting:boolean;
-}
 
-export default function ActivityList({activities,deleteActivity,submitting}: Props) {
+export default observer(function ActivityList() {
+    const {activityStore} = useStore();
+    const {deleteActivity,activities,loading} = activityStore
     const [target,setTarget] =useState('');
     function handleActivityDelete(e:any, id:string) {
         setTarget(e.currentTarget.name)
         deleteActivity(id);
     }
-    const {activityStore} = useStore();
+    
     return (
         <Container>
             {activities.map(activity => (
@@ -36,7 +34,7 @@ export default function ActivityList({activities,deleteActivity,submitting}: Pro
                             </Button>
                             <Button 
                                 name={activity.id}
-                                loading={submitting && target === activity.id}
+                                loading={loading && target === activity.id}
                                 onClick={(e) => handleActivityDelete(e, activity.id)}
                                 style={{float: 'right'}}
                                 danger>
@@ -53,5 +51,5 @@ export default function ActivityList({activities,deleteActivity,submitting}: Pro
             <Divider/>
         </Container>
     )
-}
+})
 
