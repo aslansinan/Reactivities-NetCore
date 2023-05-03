@@ -8,7 +8,7 @@ import { useStore } from '../../../app/stores/store';
 
 export default observer(function ActivityList() {
     const {activityStore} = useStore();
-    const {deleteActivity,activities,loading} = activityStore
+    const {deleteActivity,activitiesByDate,loading} = activityStore
     const [target,setTarget] =useState('');
     function handleActivityDelete(e:any, id:string) {
         setTarget(e.currentTarget.name)
@@ -17,7 +17,7 @@ export default observer(function ActivityList() {
     
     return (
         <Container>
-            {activities.map(activity => (
+            {activitiesByDate.map(activity => (
                 <Card key={activity.id} title={activity.title} className='activity-head' bordered={false}
                       style={{width: 800}}>
                     <Item.Content>
