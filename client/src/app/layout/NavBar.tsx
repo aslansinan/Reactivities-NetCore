@@ -1,38 +1,20 @@
-﻿import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
-import {Button, MenuProps } from 'antd';
-import { Menu } from 'antd';
-import { useStore } from '../stores/store';
+﻿import {Container, Menu, Button} from 'semantic-ui-react';
+import {NavLink} from 'react-router-dom';
 
-const items: MenuProps['items'] = [
-    {
-        label: 'Reactivities',
-        key: 'mail',
-        icon: <MailOutlined />,
-        className : 'mail',
-    },
-    {
-        label: 'Activities',
-        key: 'mail2',
-        icon: <AppstoreOutlined />,
-        className : 'mail',
-    },
-    {   
-        label: (
-            <Button type="primary">
-                Create Activity
-            </Button>
-        ),
-        key: 'alipay',
-        className : 'mail',
-    },
-];
-
-
-export default function NavBar(){
-    const [current, setCurrent] = useState('mail');
-    const  {activityStore} = useStore();
-
-    return <Menu onClick={() => activityStore.openForm()} className='Menu' selectedKeys={[current]} mode="horizontal" items={items} />;
+export default function NavBar() {
+  return (
+    <Menu className='Menu' mode='horizontal' inverted fixed='top'>
+      <Container>
+        <Menu.Item className='Color' as={NavLink} to='/' header  style={{marginRight:10}}>
+          <img src='/assets/logo.png' alt='logo' style={{marginRight: 30, height:30}}/>
+          Reactivities
+        </Menu.Item> 
+        <Menu.Item className='Color' as={NavLink} to='/activities' name='Activities'></Menu.Item>
+        <Menu.Item>
+          <Button className='Color' as={NavLink} to='/createActivity' positive content='Create Activity'></Button>
+        </Menu.Item>
+      </Container>
+    </Menu>
+  )
 };
     
